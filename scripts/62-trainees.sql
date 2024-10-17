@@ -1,0 +1,45 @@
+-- Connect to the database --
+\c fitconnect;
+
+-- Trainees --
+CREATE TABLE IF NOT EXISTS trainees (
+    -- Metadata --
+    id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    -- Data --
+    account_id UUID NOT NULL REFERENCES accounts(id) ON DELETE CASCADE,
+    person_id UUID NOT NULL REFERENCES people(id) ON DELETE CASCADE,
+    active BOOLEAN DEFAULT TRUE
+);
+
+CREATE TABLE IF NOT EXISTS trainee_attendance (
+    id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    trainee_id UUID NOT NULL REFERENCES trainees(id) ON DELETE CASCADE,
+    attendance_id INT REFERENCES attendance(id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS trainee_goals (
+    id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    trainee_id UUID NOT NULL REFERENCES trainees(id) ON DELETE CASCADE,
+    goal_id INT REFERENCES goals(id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS trainee_lesions (
+    id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    trainee_id UUID NOT NULL REFERENCES trainees(id) ON DELETE CASCADE,
+    lesion_id INT REFERENCES lesions(id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS trainee_measurements (
+    id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    trainee_id UUID NOT NULL REFERENCES trainees(id) ON DELETE CASCADE,
+    measurements_id INT REFERENCES measurements(id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS trainee_workouts (
+    id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    trainee_id UUID NOT NULL REFERENCES trainees(id) ON DELETE CASCADE,
+    trainer_id UUID NOT NULL REFERENCES trainers(id) ON DELETE CASCADE,
+    workout_id INT REFERENCES workouts(id) ON DELETE CASCADE
+);
