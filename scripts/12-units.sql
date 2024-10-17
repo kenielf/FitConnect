@@ -25,6 +25,9 @@ INSERT INTO units (name, abbreviation) VALUES
     ('Gigabyte', 'GB'),
     ('Terabyte', 'TB'),
 
+    ('Grams', 'g'),
+    ('Kilograms', 'g'),
+
     ('Calorie', 'cal'),
     ('Kilocalorie', 'kcal'),
 
