@@ -17,8 +17,8 @@ CREATE TABLE IF NOT EXISTS exercises (
     repetitions INT NOT NULL,
     -- Constraints --
     CONSTRAINT valid_intensity CHECK (intensity >= 0),
-    CONSTRAINT valid_sets CHECK (sets > 0 AND sets <= 10),
-    CONSTRAINT valid_repetitions CHECK (repetitions > 0 AND repetitions <= 100)
+    CONSTRAINT valid_sets CHECK (sets > 0),
+    CONSTRAINT valid_repetitions CHECK (repetitions > 0)
 );
 
 -- Workouts --
