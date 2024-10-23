@@ -15,12 +15,11 @@ CREATE TABLE IF NOT EXISTS exercises (
     intensity_unit INT NOT NULL REFERENCES units(id),
     sets INT NOT NULL,
     repetitions INT NOT NULL,
-    rest INTERVAL SECONDS NULL,
+    rest INTERVAL SECOND NULL,
     -- Constraints --
     CONSTRAINT valid_intensity CHECK (intensity >= 0),
     CONSTRAINT valid_sets CHECK (sets > 0),
     CONSTRAINT valid_repetitions CHECK (repetitions > 0)
-    CONSTRAINT valid_rest CHECK (rest > 0)
 );
 
 -- Workouts --
@@ -32,8 +31,7 @@ CREATE TABLE IF NOT EXISTS workouts (
     -- Data --
     name name_type NOT NULL,
     description description_type NULL,
-    rest INTERVAL SECONDS NULL,
-    CONSTRAINT valid_rest CHECK (rest > 0)
+    rest INTERVAL SECOND NULL
 );
 
 CREATE TABLE IF NOT EXISTS workouts_exercises (
@@ -46,8 +44,7 @@ CREATE TABLE IF NOT EXISTS workouts_exercises (
     week_day weekday_type NOT NULL,
     completed BOOLEAN DEFAULT FALSE,
     completed_at TIMESTAMP NULL,
-    idle_time INTERVAL SECONDS NULL,
-    CONSTRAINT valid_repetitions CHECK (repetitions > 0),
-    CONSTRAINT idle_time CHECK (idle_time > 0)
+    idle_time INTERVAL SECOND NULL,
+    CONSTRAINT valid_repetitions CHECK (repetitions > 0)
 );
 
