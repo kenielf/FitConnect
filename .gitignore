@@ -1,3 +1,8 @@
 # Build Files
-/bin
-/obj
+/bin/
+/obj/
+
+# Editors
+/.vs/
+/.idea/
+

@@ -1,3 +1,6 @@
+using System.Data;
+using Npgsql;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -13,7 +16,12 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+builder.Services.AddScoped<IDbConnection>(provider => new NpgsqlConnection(
+    builder.Configuration.GetConnectionString("PostgressConnection")
+));
+
 app.UseHttpsRedirection();
+
 app.UseStaticFiles();
 
 app.UseRouting();
@@ -23,3 +31,4 @@ app.UseAuthorization();
 app.MapRazorPages();
 
 app.Run();
+
