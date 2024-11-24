@@ -8,9 +8,9 @@ CREATE TABLE IF NOT EXISTS accounts (
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     -- Data --
-    username label_type NOT NULL,
-    password BYTEA NOT NULL,
-    salt BYTEA NOT NULL,
+    username TEXT NOT NULL,
+    password_hash BYTEA NOT NULL,
+    password_salt BYTEA NOT NULL,
     active BOOLEAN DEFAULT TRUE
 );
 

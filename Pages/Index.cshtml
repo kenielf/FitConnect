@@ -7,4 +7,32 @@
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+
+    <h1 class="display-2">Accounts</h1>
+    @if (Model.Accounts != null && Model.Accounts.Any())
+    {
+        <table>
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Active</th>
+                    <th>Created At</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var account in Model.Accounts)
+                {
+                    <tr>
+                        <td>@account.username</td>
+                        <td>@account.active</td>
+                        <td>@account.createdAt</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>No accounts found.</p>
+    }
 </div>

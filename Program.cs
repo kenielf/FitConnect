@@ -1,7 +1,16 @@
-using System.Data;
+// using System.Data;
 using Npgsql;
+using FitConnect.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
+// builder.Services.AddControllersWithViews();
+
+// Database
+builder.Services.AddScoped(_ => new NpgsqlConnection(
+    builder.Configuration.GetConnectionString("Postgres"))
+);
+builder.Services.AddScoped<IAccountRepository, AccountRepository>();
+
 
 // Add services to the container.
 builder.Services.AddRazorPages();
@@ -15,10 +24,6 @@ if (!app.Environment.IsDevelopment())
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
-
-builder.Services.AddScoped<IDbConnection>(provider => new NpgsqlConnection(
-    builder.Configuration.GetConnectionString("PostgressConnection")
-));
 
 app.UseHttpsRedirection();
 
